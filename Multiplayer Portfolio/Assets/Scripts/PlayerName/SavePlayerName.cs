@@ -1,36 +1,52 @@
-﻿using UnityEngine;
+﻿using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
 public class SavePlayerName : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI statusText = null;
-    [SerializeField] private TMP_InputField inputfield = null;
+    [SerializeField] private TMP_InputField textField = null;
     
     public static string playerName;
     public static bool validName = false;
     
+    [Header ("Colors")]
+    [SerializeField] private Color green;
+    [SerializeField] private Color red;
+
     private const string playerPrefsNameKey = "PlayerName";
 
     private void Start() 
     {
-        inputfield.text = PlayerPrefs.GetString(playerPrefsNameKey);
+        textField.text = PlayerPrefs.GetString(playerPrefsNameKey);
     }
     public void SaveName()
     {
-        playerName = inputfield.text;
+        playerName = textField.text;
 
         if (!string.IsNullOrEmpty(playerName)) 
         {   
             validName = true;
-            statusText.text = "Player name saved.";
+            statusText.color = green; // GREEN
+            statusText.text = "VALID";
             PlayerPrefs.SetString(playerPrefsNameKey, playerName);
         
             PhotonNetwork.NickName = playerName;
+            StartCoroutine(LoadLobby());
         }
         else 
         {
-            statusText.text = "Invalid Name. Please enter a new one.";
+            statusText.color = red; // RED
+            statusText.text = "INVALID";
         }
+    }
+    private IEnumerator LoadLobby()
+    {
+        int waitTime = 3;
+        yield return new WaitForSeconds(waitTime);
+        // Load to Lobby Scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 }
