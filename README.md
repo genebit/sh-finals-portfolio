@@ -20,3 +20,7 @@ _All rights and works by: Gene Bitara_
 
 # **WHY?**
   * With the amount of interaction and usage in online application nowadays due to the current situation, I believe that with application such as this is more in demand in the market as long as it has a lasting impact in the consumer and is suited for a wider audience.
+
+## Reference:
+  * https://dribbble.com/avatars
+  * https://www.flaticon.com/
