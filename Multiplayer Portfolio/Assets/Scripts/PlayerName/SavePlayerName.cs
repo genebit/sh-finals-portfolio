@@ -7,21 +7,21 @@ using TMPro;
 public class SavePlayerName : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI statusText = null;
+    [Header ("Color Indicator")]
+    [SerializeField] private Color green;
+    [SerializeField] private Color red;
+    
+    [Header ("Text Field")]
     [SerializeField] private TMP_InputField textField = null;
     
     public static string playerName;
     public static bool validName = false;
     
-    [Header ("Colors")]
-    [SerializeField] private Color green;
-    [SerializeField] private Color red;
 
     private const string playerPrefsNameKey = "PlayerName";
 
-    private void Start() 
-    {
-        textField.text = PlayerPrefs.GetString(playerPrefsNameKey);
-    }
+    private void Start() => textField.text = PlayerPrefs.GetString(playerPrefsNameKey);
+    
     public void SaveName()
     {
         playerName = textField.text;
