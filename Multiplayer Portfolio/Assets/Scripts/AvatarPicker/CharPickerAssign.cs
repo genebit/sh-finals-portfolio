@@ -11,7 +11,6 @@ namespace Scripts.AvatarPicker
 
         public void chooseMale()
         {
-            picker.position += position;
             // picker.GetComponent<RectTransform>().position = new Vector2(-405, 192);
         }
 
