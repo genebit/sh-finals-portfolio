@@ -8,7 +8,7 @@ namespace Scripts.Misc
         public void ReturnHome() 
         {
             // Return to Login
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+            SceneManager.LoadScene("Login");
         }   
     }
 }

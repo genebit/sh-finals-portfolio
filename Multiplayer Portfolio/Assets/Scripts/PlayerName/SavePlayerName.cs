@@ -11,7 +11,7 @@ public class SavePlayerName : MonoBehaviour
     [SerializeField] private Color green;
     [SerializeField] private Color red;
     
-    [Header ("Text Field")]
+    [Space]
     [SerializeField] private TMP_InputField textField = null;
     
     public static string playerName;
