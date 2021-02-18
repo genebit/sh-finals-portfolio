@@ -1440,6 +1440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1312615506}
   - component: {fileID: 1312615505}
+  - component: {fileID: 1312615507}
   m_Layer: 0
   m_Name: SYSTEM
   m_TagString: Untagged
@@ -1482,6 +1483,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1312615507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312615504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b79d77a73a7f2d43bf5e327b548dfa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  picker: {fileID: 1095257516}
+  position: {x: 0, y: 0}
 --- !u!1 &1583881831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,7 +1807,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1626692629}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1312615507}
+        m_MethodName: chooseMale
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1681546818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,7 +2057,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1974307770}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1312615507}
+        m_MethodName: chooseFemale
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1992107321
 GameObject:
   m_ObjectHideFlags: 0

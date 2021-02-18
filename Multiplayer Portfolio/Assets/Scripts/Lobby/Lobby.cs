@@ -23,7 +23,6 @@ namespace Scripts.Lobby
         [SerializeField] private Color greenR;
         [SerializeField] private Color redR;
         
-        public static bool isConnected;
         public static int currentPlayerInRoom = 0;
 
         private RoomOptions roomOptions;
@@ -38,6 +37,18 @@ namespace Scripts.Lobby
             PhotonNetwork.GameVersion = GAME_VERSION;
         }
 
+        private void Update() 
+        {
+            roomCountText.text = PhotonNetwork.CountOfRooms.ToString();
+            if (PhotonNetwork.CountOfRooms > 0)
+            {
+                roomCountText.color = greenR;
+            }
+            else 
+            {
+                roomCountText.color = redR;
+            }
+        }
         //----------BUTTONS-----------
         public void FindRooms()
         {
@@ -45,75 +56,54 @@ namespace Scripts.Lobby
             PhotonNetwork.JoinRandomRoom();
         }
 
-        public void CreateNewRoom()
-        {
-            roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = MAX_PLAYERS_IN_ROOM;
-            
-            PhotonNetwork.CreateRoom(null, roomOptions);
-        }
-
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
         }
         
-
     //----------CONNECTION LOBBY-----------
         public override void OnConnectedToMaster()
         {
-            statusText.text = "Connected to Master.";
-            isConnected = true;
-
+            connMasterStatText.text = "CONNECTED";
+            connMasterStatText.color = greenM;
         }
 
         public override void OnCreatedRoom()
         {
-            statusText.text = "Successfully created a new Room.";
+            statusText.text = "CREATED ROOM";
         }
 
         public override void OnJoinedRoom()
         {
-            statusText.text = "Successfully joined a room.";
-
             currentPlayerInRoom = PhotonNetwork.CurrentRoom.PlayerCount;
 
             if (currentPlayerInRoom == MAX_PLAYERS_IN_ROOM)
             {
-                statusText.text = "Room is now full! Match is ready to begin!";
+                statusText.text = "READY TO BEGIN";
             } 
             else
             {
-                statusText.text = "Waiting for other players...";
+                statusText.text = "WAITING FOR USER";
             }
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
-        {   
-            statusText.text = $"New player: {newPlayer.NickName} detected!";
-
+        { 
             currentPlayerInRoom = PhotonNetwork.CurrentRoom.PlayerCount;
 
             if (currentPlayerInRoom == MAX_PLAYERS_IN_ROOM)
             {
-                statusText.text = "Room is now full! Match is ready to begin!";
+                statusText.text = "READY TO BEGIN";
             } 
             else
             {
-                statusText.text = "Waiting for other players...";
+                statusText.text = "WAITING FOR USER";
             }
-        }
-
-        public override void OnPlayerLeftRoom(Player player)
-        {
-            statusText.text = $"Player: {player.NickName} left the Room.";
-
-            currentPlayerInRoom = PhotonNetwork.CurrentRoom.PlayerCount;
         }
 
         public override void OnLeftRoom()
         {
-            statusText.text = "You left the room.";
+            statusText.text = "YOU LEFT";
 
             currentPlayerInRoom = PhotonNetwork.CountOfRooms;
         }
@@ -121,17 +111,24 @@ namespace Scripts.Lobby
         //-------DISCONNECT-------
         public override void OnCreateRoomFailed(short returnCode, string cause)
         {
-            statusText.text = $"Create room failed! Try again! cause: {cause}";
+            statusText.text = "ROOM CREATE FAILED";
+            statusText.color = redS;
         }
 
         public override void OnJoinRandomFailed(short returnCode, string cause)
         {
-            statusText.text = $"No players were found! error: {cause}";
+            statusText.text = "NO ROOMS";
+            statusText.color = redS;
+            PhotonNetwork.CreateRoom(null, roomOptions);
         }
   
         public override void OnDisconnected(DisconnectCause cause)
         {
-            statusText.text = $"Player Disconnected cause: {cause}";
+            statusText.text = "DISCONNECTED";
+            statusText.color = redS;
+
+            connMasterStatText.text = "DISCONNECTED";
+            statusText.color = redM;
         }
         
     }
