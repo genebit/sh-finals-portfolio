@@ -1,13 +1,16 @@
 ﻿using Photon.Pun;
 using TMPro;
 
-public class NameTagAssign : MonoBehaviourPun
+namespace Scripts.PlayerName
 {
-    private TextMeshProUGUI playernameDisplay;
-
-    void Start()
+    public class NameTagAssign : MonoBehaviourPun
     {
-        playernameDisplay = GetComponent<TextMeshProUGUI>();
-        playernameDisplay.text = photonView.Owner.NickName;
+        private TextMeshProUGUI playernameDisplay;
+
+        void Start()
+        {
+            playernameDisplay = GetComponent<TextMeshProUGUI>();
+            playernameDisplay.text = PhotonNetwork.NickName;
+        }
     }
 }
