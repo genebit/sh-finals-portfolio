@@ -10,7 +10,7 @@ namespace Scripts.PlayerName
         void Start()
         {
             playernameDisplay = GetComponent<TextMeshProUGUI>();
-            playernameDisplay.text = PhotonNetwork.NickName;
+            playernameDisplay.text = photonView.Owner.NickName;
         }
     }
 }

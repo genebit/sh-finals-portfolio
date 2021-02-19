@@ -4,7 +4,6 @@ using Photon.Realtime;
 
 public class PlayerOnLeave : MonoBehaviourPunCallbacks
 {
-
     // Back Button
     public void LeaveRoom()
     {
