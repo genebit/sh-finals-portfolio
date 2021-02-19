@@ -37,8 +37,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         {
             chatClient.PublishMessage(room1, inputMessageField.text);
             inputMessageField.text = "";
-
-            messageLogs.text = messageLogs.text + Environment.NewLine + inputMessageField.text;
         }
     }
 //----------------IMPLEMENTED INTERFACE---------------->
@@ -52,6 +50,17 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         Debug.Log("Connected");
     }
 
+
+    public void OnGetMessages(string channelName, string[] senders, object[] messages)
+    {
+        messageLogs.text = messageLogs.text + Environment.NewLine + inputMessageField.text;
+    }
+
+    public void OnPrivateMessage(string sender, object message, string channelName)
+    {
+
+    }
+
     public void DebugReturn(DebugLevel level, string message)
     {
     }
@@ -60,17 +69,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
 
     }
-
-    public void OnGetMessages(string channelName, string[] senders, object[] messages)
-    {
-
-    }
-
-    public void OnPrivateMessage(string sender, object message, string channelName)
-    {
-
-    }
-
+    
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
 
@@ -78,7 +77,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnSubscribed(string[] channels, bool[] results)
     {
-        Debug.Log(channels);
+        
     }
 
     public void OnUnsubscribed(string[] channels)
@@ -88,7 +87,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnUserSubscribed(string channel, string user)
     {
-        Debug.Log(channel);
+       
     }
 
     public void OnUserUnsubscribed(string channel, string user)

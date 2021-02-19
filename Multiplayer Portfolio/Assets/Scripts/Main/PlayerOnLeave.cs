@@ -1,4 +1,4 @@
-﻿using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -19,8 +19,8 @@ public class PlayerOnLeave : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        // Go to Login Scene
-        SceneManager.LoadScene("Login");
+        // Go to Lobby Scene
+        PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex-1);
     }
 }   
 
