@@ -6,17 +6,16 @@ namespace Scripts.AvatarPicker
 {     
     public class CharPickerAssign : MonoBehaviour
     {
-        public RectTransform picker;
-        public Vector2 position;
+        public Transform picker;
 
         public void chooseMale()
         {
-            // picker.GetComponent<RectTransform>().position = new Vector2(-405, 192);
+            picker.position = new Vector2(-5.6f, 0);
         }
 
         public void chooseFemale()
         {
-            // picker.GetComponent<RectTransform>().position = new Vector2(400, 192);
+            picker.position = new Vector2(5.5f, 0);
         }
     }
 }
