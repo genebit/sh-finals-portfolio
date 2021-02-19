@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -25,6 +26,7 @@ namespace Scripts.Lobby
         
         public static int currentPlayerInRoom = 0;
 
+        private int roomCount = 0;
         private RoomOptions roomOptions;
         private const string GAME_VERSION = "0.1";
         private const int MAX_PLAYERS_IN_ROOM = 2;
@@ -39,7 +41,9 @@ namespace Scripts.Lobby
 
         private void Update() 
         {
-            roomCountText.text = PhotonNetwork.CountOfRooms.ToString();
+            roomCountText.text = roomCount.ToString();
+            // Debug.Log(PhotonNetwork.CountOfRooms);
+
             if (PhotonNetwork.CountOfRooms > 0)
             {
                 roomCountText.color = greenR;
@@ -52,13 +56,16 @@ namespace Scripts.Lobby
         //----------BUTTONS-----------
         public void FindRooms()
         {
-            statusText.text = "Finding Players...";
+            statusText.text = "FINDING";
+            statusText.color = redS;
+            
             PhotonNetwork.JoinRandomRoom();
         }
 
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();
         }
         
     //----------CONNECTION LOBBY-----------
@@ -66,25 +73,39 @@ namespace Scripts.Lobby
         {
             connMasterStatText.text = "CONNECTED";
             connMasterStatText.color = greenM;
+            
+            statusText.text = "CONNECTED";
+            statusText.color = greenS;
         }
 
         public override void OnCreatedRoom()
         {
             statusText.text = "CREATED ROOM";
+            statusText.color = greenS;
+
+            roomCount = PhotonNetwork.CountOfRooms;
         }
 
         public override void OnJoinedRoom()
         {
             currentPlayerInRoom = PhotonNetwork.CurrentRoom.PlayerCount;
+            statusText.text = "JOINED ROOM";
+            statusText.color = greenS;
 
             if (currentPlayerInRoom == MAX_PLAYERS_IN_ROOM)
             {
-                statusText.text = "READY TO BEGIN";
+                statusText.text = "STARTING";
+                statusText.color = greenS;
+
+                StartCoroutine(LoadMainScene());
             } 
             else
             {
-                statusText.text = "WAITING FOR USER";
+                statusText.text = "WAITING";
+                statusText.color = greenS;
             }
+
+            roomCount = PhotonNetwork.CountOfRooms;
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -93,19 +114,27 @@ namespace Scripts.Lobby
 
             if (currentPlayerInRoom == MAX_PLAYERS_IN_ROOM)
             {
-                statusText.text = "READY TO BEGIN";
+                statusText.text = "STARTING";
+                statusText.color = greenS;
+
+                StartCoroutine(LoadMainScene());
             } 
             else
             {
-                statusText.text = "WAITING FOR USER";
+                statusText.text = "WAITING";
+                statusText.color = greenS;
             }
+
+            roomCount = PhotonNetwork.CountOfRooms;
         }
 
         public override void OnLeftRoom()
         {
             statusText.text = "YOU LEFT";
+            statusText.color = redS;
 
             currentPlayerInRoom = PhotonNetwork.CountOfRooms;
+            roomCount = PhotonNetwork.CountOfRooms;
         }
 
         //-------DISCONNECT-------
@@ -113,13 +142,17 @@ namespace Scripts.Lobby
         {
             statusText.text = "ROOM CREATE FAILED";
             statusText.color = redS;
+
+            roomCount = PhotonNetwork.CountOfRooms;
         }
 
         public override void OnJoinRandomFailed(short returnCode, string cause)
         {
             statusText.text = "NO ROOMS";
             statusText.color = redS;
-            PhotonNetwork.CreateRoom(null, roomOptions);
+            PhotonNetwork.CreateRoom("MyRoom", roomOptions);
+
+            roomCount = PhotonNetwork.CountOfRooms;
         }
   
         public override void OnDisconnected(DisconnectCause cause)
@@ -129,8 +162,19 @@ namespace Scripts.Lobby
 
             connMasterStatText.text = "DISCONNECTED";
             statusText.color = redM;
+
+            roomCount = PhotonNetwork.CountOfRooms;
+
+            SceneManager.LoadScene("Login");
         }
         
+        private IEnumerator LoadMainScene()
+        {
+            float waitTime = 2f;
+            yield return new WaitForSeconds(waitTime);
+            // Go to Main Scene (Both Clients)
+            PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex+1);
+        }
     }
 }
 
