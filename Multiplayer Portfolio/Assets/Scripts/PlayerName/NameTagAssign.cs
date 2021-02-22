@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using UnityEngine;
+using Photon.Pun;
 using TMPro;
 
 namespace Scripts.PlayerName
@@ -7,10 +8,11 @@ namespace Scripts.PlayerName
     {
         private TextMeshProUGUI playernameDisplay;
 
-        void Start()
+        private void Start()
         {
             playernameDisplay = GetComponent<TextMeshProUGUI>();
             playernameDisplay.text = photonView.Owner.NickName;
+            
         }
     }
 }

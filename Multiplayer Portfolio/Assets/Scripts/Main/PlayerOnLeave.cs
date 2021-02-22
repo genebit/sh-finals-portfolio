@@ -14,7 +14,10 @@ public class PlayerOnLeave : MonoBehaviourPunCallbacks
     private void Update() 
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount != Lobby.MAX_PLAYERS) 
+        {
+            PhotonNetwork.LeaveRoom();
             PhotonNetwork.Disconnect();   
+        }
     }
 
     public override void OnDisconnected(DisconnectCause cause)

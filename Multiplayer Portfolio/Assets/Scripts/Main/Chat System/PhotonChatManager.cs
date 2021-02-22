@@ -72,14 +72,14 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         }
     }
 
-    public void OnPrivateMessage(string sender, object message, string channelName)
-    {
-        
-    }
-
     public void OnUnsubscribed(string[] channels)
     {
         Debug.Log("Unsubscribed");
+    }
+
+    public void OnPrivateMessage(string sender, object message, string channelName)
+    {
+        
     }
 
     public void DebugReturn(DebugLevel level, string message)
