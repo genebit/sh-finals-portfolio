@@ -78,6 +78,8 @@ public class Lobby : MonoBehaviourPunCallbacks
     {
         statusText.text = "CREATED ROOM";
         statusText.color = greenS;
+        
+        PlayerAvatarAssign.host = true;
     }
 
     public override void OnJoinedRoom()
