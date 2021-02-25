@@ -1,5 +1,7 @@
 # **Unity-Multiplayer-Portfolio**
 AMA 2021 Finals Portfolio Project with the use of Unity's Photon Network PUN library for handling multiplayer connection. 
+# **Feature:**
+  * Chat-box system that is not only applicable for game but for PC apps as well.
 ![alt text](https://i.imgur.com/vQEB0nm.png)
 ![alt text](https://i.imgur.com/GtgSfTS.png)
 _All rights and works by: Gene Bitara_
@@ -15,9 +17,6 @@ _All rights and works by: Gene Bitara_
 ## _Libraries:_
   * Photon PUN & Photon Chat
   * C# Unity
-
-# **Features:**
-  * Chat-box system that is not only applicable for game but for PC apps as well.
 
 ## Reference:
   * https://dribbble.com/avatars
