@@ -4,6 +4,8 @@ AMA 2021 Finals Portfolio Project with the use of Unity's Photon Network PUN lib
 ![alt text](https://i.imgur.com/GtgSfTS.png)
 _All rights and works by: Gene Bitara_
 
+# **HOW TO USE?**
+ Clone the project and run in the unity engine and build the project to any file destination, Open 2 screens to test.
 ## _Target Company:_ 
   * Game Studio.
 
@@ -11,16 +13,11 @@ _All rights and works by: Gene Bitara_
   * Showcase and Highlight Multiplayer Photon Network library in unity and display how It *can be applied to PC Applications as well.
 
 ## _Libraries:_
-  * Photon PUN 
+  * Photon PUN & Photon Chat
   * C# Unity
 
 # **Features:**
   * Chat-box system that is not only applicable for game but for PC apps as well.
-
-  * Visual scene in unity when player connects show in scene using Instantiate through network.
-
-# **WHY?**
-  * With the amount of interaction and usage in online application nowadays due to the current situation, I believe that with application such as this is more in demand in the market as long as it has a lasting impact in the consumer and is suited for a wider audience.
 
 ## Reference:
   * https://dribbble.com/avatars
